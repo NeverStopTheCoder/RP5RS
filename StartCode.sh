@@ -25,15 +25,19 @@ cp /proc/cpuinfo /tmp/cpuinfo
 sudo sh -c 'echo "Hardware : BCM2835" >> /tmp/cpuinfo'
 sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
 
-sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./arcade-myGame.elf --hw rpi" | sudo tee myGame.sh
+sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./*.elf --hw rpi" | sudo tee myGame.sh
 
-echo "import os,glob
+cat << 'EOF' > converter.py
+import os,glob
 
 def setup_cartridge():
 
 #1. Find the game file (any .elf)
 
-elf_files = glob.glob("*.elf")if not elf_files:print("Error: No game (.elf) found on this cartridge!")return
+elf_files = glob.glob("*.elf")
+if not elf_files:
+print("Error: No game (.elf) found on this cartridge!")
+return
 game_name = elf_files[0]
 print(f"Preparing cartridge for: {game_name}")
 
@@ -49,12 +53,12 @@ with open("boot.sh", "w") as f:
 os.system("chmod +x boot.sh")
 print("Cartridge is ready for Auto-Boot!")
 
-setup_cartridge()" | sudo tee converter.py
+setup_cartridge()
+EOF
 
 python3 converter.py
 
-chmod +x myGame.sh
+sudo chmod +x myGame.sh
+sudo chmod +x ./*.elf
 
-chmod +x arcade-myGame.elf
-
-./myGame.sh
+sudo ./myGame.sh
