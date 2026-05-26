@@ -32,4 +32,4 @@ def RunGame():
     os.system("chmod +x StartCode.sh")
     
     # Run your exact shell script exactly as you wrote it
-    os.system("./StartCode.sh")
+    os.system("sudo ./StartCode.sh")
