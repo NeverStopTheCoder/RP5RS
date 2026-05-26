@@ -27,7 +27,7 @@ sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
 
 sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./arcade-myGame.elf --hw rpi" | sudo tee myGame.sh
 
-echo "import os,import glob
+echo "import os,glob
 
 def setup_cartridge():
 
