@@ -7,7 +7,7 @@ import RP5RS
 RP5RS.SetCurrentGameTo()
 RP5RS.RunGame()
 ```
-# You can put a elf file in the SetCurrentGameTo() function like this
+You can put a elf file in the SetCurrentGameTo() function like this
 ```python
 RP5RS.SetCurrentGameTo(myGame.elf)
 ```
