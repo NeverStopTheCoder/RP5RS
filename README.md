@@ -12,3 +12,5 @@ You can put a elf file in the SetCurrentGameTo() function like this
 RP5RS.SetCurrentGameTo(myGame.elf)
 ```
 But if you dont put a file in there it will grab the first one from the home folder
+
+Note:this only works for a keyboard right now
