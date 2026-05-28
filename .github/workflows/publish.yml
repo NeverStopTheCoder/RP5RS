@@ -8,10 +8,9 @@ jobs:
   build-n-publish:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
+    environment: pypi
     permissions:
       id-token: write
-
-    # This block handles the deployment environment details cleanly
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -24,5 +23,3 @@ jobs:
       run: python3 -m build
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        repository-url: https://upload.pypi.org/legacy/
