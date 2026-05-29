@@ -28,8 +28,8 @@ def RunGame():
             
     print(f"Launching your custom setup script for {CURRENT_GAME}...")
     
-    # Make sure your shell script has execution permissions
-    os.system("chmod +x StartCode.sh")
-    
-    # Run your exact shell script exactly as you wrote it
-    os.system("sudo ./StartCode.sh")
+    package_dir = os.path.dirname(os.path.abspath(__file__))
+    start_code_path = os.path.join(package_dir, "StartCode.sh")
+
+    os.system(f"chmod +x {start_code_path}")
+    os.system(f"sudo {start_code_path}")
