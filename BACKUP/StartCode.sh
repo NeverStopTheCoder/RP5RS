@@ -51,8 +51,9 @@ with open("boot.sh", "w") as f:
     f.write(f"sudo ./{game_name} --hw rpi\n")
 
 os.system("chmod +x boot.sh")
+print(LOADING...)
+sleep(0.5)
 print("Cartridge is ready for Auto-Boot!")
-
 setup_cartridge()
 EOF
 
