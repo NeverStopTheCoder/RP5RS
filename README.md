@@ -31,3 +31,4 @@ Made By NeverStopTheCoder © 2026
 LOADING...
 Cartridge is ready for Auto-Boot!
 (game runs)
+```
