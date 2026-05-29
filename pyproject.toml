@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RP5RS"
-version = "1.0.4"
+version = "1.0.5"
 authors = [
   { name="Jenny Fuller", email="jennyfuller1085@example.com" },
 ]
@@ -18,3 +18,7 @@ classifiers = [
 ]
 [tool.setuptools]
 include-package-data = true
+
+# THIS IS THE MAGIC FIX HERE:
+[tool.setuptools.package-data]
+"RP5RS" = ["*.sh"]
