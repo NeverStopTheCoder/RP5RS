@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "RP5RS"
-version = "1.0.3"
+version = "1.0.4"
 authors = [
   { name="Jenny Fuller", email="jennyfuller1085@example.com" },
 ]
@@ -16,3 +16,5 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
 ]
+[tool.setuptools]
+include-package-data = true
