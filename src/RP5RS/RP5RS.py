@@ -102,3 +102,5 @@ def ReplaceAllFilesWith(game_name=None):
             if file != f"{home_dir}/UsedGame.elf":
                 os.remove(file)
                 return "UsedGame.elf"
+def GetCurrentGame():
+    return CURRENT_GAME
