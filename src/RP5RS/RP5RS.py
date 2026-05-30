@@ -88,6 +88,7 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     ssh.close()
     if SetAsCurrent is True:
         CURRENT_GAME = game_name
+    print(f"🚀 Success! {game_name} has been pushed to the Raspberry Pi.")
         
 def ReplaceAllFilesWith(game_name=None):
         home_dir = Path.home()
