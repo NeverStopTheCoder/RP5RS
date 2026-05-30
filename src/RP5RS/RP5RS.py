@@ -59,7 +59,7 @@ def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,Se
     ssh.close()
     if SetAsCurrent is True:
         CURRENT_GAME = game_name
-""""
+"""
 def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=False, SetAsCurrent=False, LaunchGame=False):
     global CURRENT_GAME
     # 1. Defined at the top so it's always ready for the SFTP transfer
