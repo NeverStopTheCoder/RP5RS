@@ -35,11 +35,11 @@ def RunGame():
 
     os.system(f"chmod +x {start_code_path}")
     os.system(f"sudo {start_code_path}")
-    
+""" 
 def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,SetAsCurrent=False,LaunchGame=False):
     global CURRENT_GAME
     if SetAsCurrent is True:
-        SetCurrentGame()
+        SetCurrentGameTO()
     if ReplaceOldFiles is True:
         home_dir = Path.home()
         os.rename(home_dir/game_name,home_dir/"UsedGame.elf")
@@ -48,15 +48,44 @@ def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,Se
         for file in elf_files: 
             if file != f"{home_dir}/UsedGame.elf":
                 os.remove(file)
-        ssh = paramiko.SSHClient() 
-        ssh.connect(PI_id, username=Username, password=Password) # Default IP/login, this may be different for you
-        sftp = ssh.open_sftp()
-        # Localpath is a string containing the path of the local file, remotepath is where the file should be copied on the raspberry pi
-        sftp.put(home_dir/game_name, f'/home/{Username}/{game_name}')
-        if LaunchGame is True:
-            ssh.exec_command(f"python3 /home/{Username}/RunGame.py")
-        sftp.close()
-        ssh.close()
+    ssh = paramiko.SSHClient() 
+    ssh.connect(PI_id, username=Username, password=Password) # Default IP/login, this may be different for you
+    sftp = ssh.open_sftp()
+    # Localpath is a string containing the path of the local file, remotepath is where the file should be copied on the raspberry pi
+    sftp.put(home_dir/game_name, f'/home/{Username}/{game_name}')
+    if LaunchGame is True:
+    ssh.exec_command(f"python3 /home/{Username}/RunGame.py")
+    sftp.close()
+    ssh.close()
+    if SetAsCurrent is True:
+        CURRENT_GAME = game_name
+""""
+def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=False, SetAsCurrent=False, LaunchGame=False):
+    global CURRENT_GAME
+    # 1. Defined at the top so it's always ready for the SFTP transfer
+    home_dir = Path.home()   
+    # 2. Fixed the function name typo
+    if SetAsCurrent is True:
+        SetCurrentGameTo()       
+    # 3. Local file cleanup (Only runs if ReplaceOldFiles is True)
+    if ReplaceOldFiles is True:
+        os.rename(home_dir/game_name, home_dir/"UsedGame.elf")
+        game_name = "UsedGame.elf"
+        elf_files = glob.glob(f"{home_dir}/*.elf")
+        for file in elf_files: 
+            if file != f"{home_dir}/UsedGame.elf":
+                os.remove(file)              
+    # 4. Network block (Runs EVERY time now, outside the file cleanup block)
+    ssh = paramiko.SSHClient() 
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy()) # Bypasses the known_hosts wall
+    ssh.connect(PI_id, username=Username, password=Password) 
+    sftp = ssh.open_sftp()
+    sftp.put(home_dir/game_name, f'/home/{Username}/{game_name}')
+    sftp.close() 
+    # 5. Fixed the indentation so the game only launches if requested
+    if LaunchGame is True:
+        ssh.exec_command(f"python3 /home/{Username}/RunGame.py")  
+    ssh.close()
     if SetAsCurrent is True:
         CURRENT_GAME = game_name
         
