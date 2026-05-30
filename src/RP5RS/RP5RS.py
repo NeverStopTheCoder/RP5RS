@@ -64,6 +64,9 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     global CURRENT_GAME
     # 1. Defined at the top so it's always ready for the SFTP transfer
     home_dir = Path.home()   
+    if not (home_dir/game_name).exists():
+    print(f"❌ Error: Couldn't find '{game_name}' in your home directory!")
+    return
     # 2. Fixed the function name typo
     if SetAsCurrent is True:
         SetCurrentGameTo()       
