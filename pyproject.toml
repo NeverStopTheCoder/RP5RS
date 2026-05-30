@@ -11,6 +11,12 @@ authors = [
 description = "An automated initialization environment wrapper for MakeCode Arcade on Raspberry Pi 5"
 readme = "README.md"
 requires-python = ">=3.7"
+
+# 💥 THE MAGIC FIX FOR PARAMIKO GOES HERE:
+dependencies = [
+    "paramiko",
+]
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
