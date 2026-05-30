@@ -32,3 +32,10 @@ LOADING...
 Cartridge is ready for Auto-Boot!
 (game runs)
 ```
+## More Code
+```python
+# Sends the game over to the pi from the linux folder on your device (use this on the sender not the pi)
+SendGameOver()
+# Replaces all the files in the home folder with the set Game
+ReplaceAllFilesWith()
+```
