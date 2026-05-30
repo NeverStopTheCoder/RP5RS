@@ -35,7 +35,7 @@ Cartridge is ready for Auto-Boot!
 ## More Code
 ```python
 # Sends the game over to the pi from the linux folder on your device (use this on the sender not the pi)
-SendGameOver()
+RP5RS.SendGameOver()
 # Replaces all the files in the home folder with the set Game
-ReplaceAllFilesWith()
+RP5RS.ReplaceAllFilesWith()
 ```
