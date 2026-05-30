@@ -60,3 +60,12 @@ def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,Se
     if SetAsCurrent is True:
         CURRENT_GAME = game_name
         
+def ReplaceAllFilesWith(game_name=None):
+        home_dir = Path.home()
+        os.rename(home_dir/game_name,home_dir/"UsedGame.elf")
+        game_name = "UsedGame.elf"
+        elf_files = glob.glob(f"{home_dir}/*.elf")
+        for file in elf_files: 
+            if file != f"{home_dir}/UsedGame.elf":
+                os.remove(file)
+                return "UsedGame.elf"
