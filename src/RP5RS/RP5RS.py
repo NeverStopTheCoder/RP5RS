@@ -1,5 +1,7 @@
 import os
 import glob
+import paramiko 
+from pathlib import Path
 
 # This keeps track of the game name between functions
 CURRENT_GAME = ""
@@ -33,3 +35,28 @@ def RunGame():
 
     os.system(f"chmod +x {start_code_path}")
     os.system(f"sudo {start_code_path}")
+    
+def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,SetAsCurrent=False,LaunchGame=False):
+    global CURRENT_GAME
+    if SetAsCurrent is True:
+        SetCurrentGame()
+    if ReplaceOldFiles is True:
+        home_dir = Path.home()
+        os.rename(home_dir/game_name,home_dir/"UsedGame.elf")
+        game_name = "UsedGame.elf"
+        elf_files = glob.glob(f"{home_dir}/*.elf")
+        for file in elf_files: 
+            if file != f"{home_dir}/UsedGame.elf":
+                os.remove(file)
+        ssh = paramiko.SSHClient() 
+        ssh.connect(PI_id, username=Username, password=Password) # Default IP/login, this may be different for you
+        sftp = ssh.open_sftp()
+        # Localpath is a string containing the path of the local file, remotepath is where the file should be copied on the raspberry pi
+        sftp.put(home_dir/game_name, f'/home/{Username}/{game_name}')
+        if LaunchGame is True:
+            ssh.exec_command(f"python3 /home/{Username}/RunGame.py")
+        sftp.close()
+        ssh.close()
+    if SetAsCurrent is True:
+        CURRENT_GAME = game_name
+        
