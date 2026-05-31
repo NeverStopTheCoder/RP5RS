@@ -65,8 +65,8 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     # 1. Defined at the top so it's always ready for the SFTP transfer
     home_dir = Path.home()   
     if not (home_dir/game_name).exists():
-    print(f"❌ Error: Couldn't find '{game_name}' in your home directory!")
-    return
+        print(f"❌ Error: Couldn't find '{game_name}' in your home directory!")
+        return
     # 2. Fixed the function name typo
     if SetAsCurrent is True:
         SetCurrentGameTo()       
@@ -87,7 +87,7 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     sftp.close() 
     # 5. Fixed the indentation so the game only launches if requested
     if LaunchGame is True:
-        ssh.exec_command(f"python3 /home/{Username}/RunGame.py")  
+        ssh.exec_command(f"python3 /home/{Username}/RunGame.py")
     ssh.close()
     if SetAsCurrent is True:
         CURRENT_GAME = game_name
