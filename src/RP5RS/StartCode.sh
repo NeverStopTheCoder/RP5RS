@@ -19,14 +19,14 @@ kbd_mode=1" | sudo tee /sd/arcade.cfg
 
 echo "#!/bin/bash
 
-sudo pkill -f '\.elf' 2>/dev/null
-while mountpoint -q /proc/cpuinfo; do sudo umount -l /proc/cpuinfo; done
+sudo umount -l /proc/cpuinfo
 sudo rm -f /tmp/cpuinfo
+
 cp /proc/cpuinfo /tmp/cpuinfo
 sudo sh -c 'echo "Hardware : BCM2835" >> /tmp/cpuinfo'
 sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
-TARGET_GAME=\$(ls -t *.elf | grep -v UsedGame.elf | head -n 1)
-sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./"\$TARGET_GAME" --hw rpi
+
+sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./*.elf --hw rpi
 
 cat << 'EOF' > converter.py
 import os,glob,time
