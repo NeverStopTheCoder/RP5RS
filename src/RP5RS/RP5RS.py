@@ -65,7 +65,7 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     # 1. Defined at the top so it's always ready for the SFTP transfer
     home_dir = Path.home()   
     if not (home_dir/game_name).exists():
-    print(f"❌ Error: Couldn't find '{game_name}' in your home directory!")
+        print(f"❌ Error: Couldn't find '{game_name}' in your home directory!")
     return
     # 2. Fixed the function name typo
     if SetAsCurrent is True:
@@ -91,7 +91,7 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     ssh.close()
     if SetAsCurrent is True:
         CURRENT_GAME = game_name
-    print(f"🚀 Success! {game_name} has been pushed to the Raspberry Pi.")
+        print(f"🚀 Success! {game_name} has been pushed to the Raspberry Pi.")
         
 def ReplaceAllFilesWith(game_name=None):
         home_dir = Path.home()
