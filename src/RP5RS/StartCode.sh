@@ -66,7 +66,7 @@ def setup_cartridge():
     with open("boot.sh", "w") as f:
         f.write(f"#!/bin/bash\n")
         f.write(f"sleep 2\n") # Wait for Pi 5 graphics to wake up
-        f.write(f"sudo ./{game_name} --hw rpi &\n")
+        f.write(f"sudo ./{game_name} --hw rpi \n")
 
     os.system("chmod +x boot.sh")
     print("LOADING...")
