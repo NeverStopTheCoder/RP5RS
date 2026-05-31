@@ -54,7 +54,7 @@ def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,Se
     # Localpath is a string containing the path of the local file, remotepath is where the file should be copied on the raspberry pi
     sftp.put(home_dir/game_name, f'/home/{Username}/{game_name}')
     if LaunchGame is True:
-    ssh.exec_command(f"python3 /home/{Username}/RunGame.py")
+    ssh.exec_command(f"nohup python3 /home/{Username}/RunGame.py > /dev/null 2>&1 &")
     sftp.close()
     ssh.close()
     if SetAsCurrent is True:
