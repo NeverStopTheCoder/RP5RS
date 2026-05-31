@@ -25,7 +25,7 @@ cp /proc/cpuinfo /tmp/cpuinfo
 sudo sh -c 'echo "Hardware : BCM2835" >> /tmp/cpuinfo'
 sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
 
-sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./*.elf --hw rpi" | sudo tee myGame.sh
+sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./\$(cat current_game.txt) --hw rpi" | sudo tee myGame.sh
 
 cat << 'EOF' > converter.py
 import os,glob,time
@@ -52,11 +52,8 @@ def setup_cartridge():
 
     #1. Find the game file (any .elf)
 
-    elf_files = glob.glob("*.elf")
-    if not elf_files:
-        print("Error: No game (.elf) found on this cartridge!")
-        return
-    game_name = elf_files[0]
+    with open("current_game.txt", "r") as f:
+        game_name = f.read().strip()
     print(f"Preparing cartridge for: {game_name}")
 
     # 2. Force permissions
@@ -66,7 +63,7 @@ def setup_cartridge():
     with open("boot.sh", "w") as f:
         f.write(f"#!/bin/bash\n")
         f.write(f"sleep 2\n") # Wait for Pi 5 graphics to wake up
-        f.write(f"sudo ./{game_name} --hw rpi \n")
+        f.write(f"./{game_name} --hw rpi \n")
 
     os.system("chmod +x boot.sh")
     print("LOADING...")
@@ -81,4 +78,4 @@ python3 converter.py
 sudo chmod +x myGame.sh
 sudo chmod +x ./*.elf
 
-sudo ./myGame.sh
+./myGame.sh
