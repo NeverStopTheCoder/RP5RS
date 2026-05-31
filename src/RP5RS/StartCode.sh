@@ -14,18 +14,19 @@ BTN_A=57
 BTN_B=29
 BTN_MENU=41
 BTN_RESET=14
+BTN_EXIT=1
 kbd_mode=1" | sudo tee /sd/arcade.cfg
 
 echo "#!/bin/bash
 
-sudo umount -l /proc/cpuinfo
+sudo pkill -f '\.elf' 2>/dev/null
+while mountpoint -q /proc/cpuinfo; do sudo umount -l /proc/cpuinfo; done
 sudo rm -f /tmp/cpuinfo
-
 cp /proc/cpuinfo /tmp/cpuinfo
 sudo sh -c 'echo "Hardware : BCM2835" >> /tmp/cpuinfo'
 sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
-
-sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./*.elf --hw rpi" | sudo tee myGame.sh
+TARGET_GAME=\$(ls -t *.elf | grep -v UsedGame.elf | head -n 1)
+sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./"\$TARGET_GAME" --hw rpi
 
 cat << 'EOF' > converter.py
 import os,glob,time
