@@ -18,6 +18,10 @@ def SetCurrentGameTo(game_name=None):
     else:
         CURRENT_GAME = game_name
         
+    # NEW: Write the text file
+    with open("current_game.txt", "w") as f:
+        f.write(CURRENT_GAME)
+        
     print(f"Current game target set to: {CURRENT_GAME}")
     return True
 
@@ -84,8 +88,9 @@ def SendGameOver(PI_id, Username, Password, game_name=None, ReplaceOldFiles=Fals
     ssh.connect(PI_id, username=Username, password=Password) 
     sftp = ssh.open_sftp()
     sftp.put(home_dir/game_name, f'/home/{Username}/{game_name}')
-    sftp.close() 
-    # 5. Fixed the indentation so the game only launches if requested
+    # NEW: Send the text file to the Pi
+    if os.path.exists("current_game.txt"):
+        sftp.put("current_game.txt", f'/home/{Username}/current_game.txt')        
     if LaunchGame is True:
         ssh.exec_command(f"python3 /home/{Username}/RunGame.py")  
     ssh.close()
