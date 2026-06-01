@@ -14,7 +14,6 @@ BTN_A=57
 BTN_B=29
 BTN_MENU=41
 BTN_RESET=14
-BTN_EXIT=1
 kbd_mode=1" | sudo tee /sd/arcade.cfg
 
 echo "#!/bin/bash
@@ -26,7 +25,7 @@ cp /proc/cpuinfo /tmp/cpuinfo
 sudo sh -c 'echo "Hardware : BCM2835" >> /tmp/cpuinfo'
 sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
 
-sudo SDL_VIDEODRIVER=kmsdrm SDL_EVDEV_DEVICES=/dev/input/event0 ./*.elf --hw rpi
+sudo TERM=linux sh -c 'setterm -blank 0 -powerdown 0 > /dev/tty1' && sudo SDL_VIDEODRIVER=kmsdrm SDL_AUDIODRIVER=alsa ./*.elf --hw rpi
 
 cat << 'EOF' > converter.py
 import os,glob,time
@@ -67,8 +66,7 @@ def setup_cartridge():
     with open("boot.sh", "w") as f:
         f.write(f"#!/bin/bash\n")
         f.write(f"sleep 2\n") # Wait for Pi 5 graphics to wake up
-        f.write(f"sudo ./{game_name} --hw rpi &\n")
-
+        f.write(f"sudo TERM=linux sh -c 'setterm -blank 0 -powerdown 0 > /dev/tty1' && sudo SDL_VIDEODRIVER=kmsdrm SDL_AUDIODRIVER=alsa ./{game_name} --hw rpi &\n")
     os.system("chmod +x boot.sh")
     print("LOADING...")
     time.sleep(0.5)
