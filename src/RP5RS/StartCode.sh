@@ -2,7 +2,7 @@
 sudo mkdir /sd
 
 echo "[Target]
-Hardware=pc
+Hardware=rpi
 
 [Input]
 SCAN_CODES=/dev/input/event0
