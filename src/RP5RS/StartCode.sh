@@ -1,4 +1,4 @@
-
+#!/bin/bash
 sudo mkdir /sd
 
 echo "[Target]
@@ -16,11 +16,9 @@ BTN_MENU=41
 BTN_RESET=14
 kbd_mode=1" | sudo tee /sd/arcade.cfg
 
-echo "#!/bin/bash
-
-sudo umount -l /proc/cpuinfo
+# 2. Apply the Pi 5 signature spoofing trick
+sudo umount -l /proc/cpuinfo 2>/dev/null
 sudo rm -f /tmp/cpuinfo
-
 cp /proc/cpuinfo /tmp/cpuinfo
 sudo sh -c 'echo "Hardware : BCM2835" >> /tmp/cpuinfo'
 sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
