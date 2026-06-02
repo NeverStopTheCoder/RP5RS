@@ -33,8 +33,8 @@ def RunGame():
     package_dir = os.path.dirname(os.path.abspath(__file__))
     start_code_path = os.path.join(package_dir, "StartCode.sh")
 
-    os.system(f"chmod +x {start_code_path}")
-    os.system(f"sudo {start_code_path}")
+    os.system(f"sudo chmod +x {start_code_path}")
+    os.system(f"sudo bash {start_code_path}")
 """ 
 def SendGameOver(PI_id,Username,Password,game_name=None,ReplaceOldFiles=False,SetAsCurrent=False,LaunchGame=False):
     global CURRENT_GAME
