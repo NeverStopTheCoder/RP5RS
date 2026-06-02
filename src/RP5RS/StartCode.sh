@@ -60,6 +60,3 @@ while true; do
     sleep 1.5
     echo "Ready for next match!"
 done
-sudo chmod +x ./*.elf
-
-sudo ./myGame.sh
