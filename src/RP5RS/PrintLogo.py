@@ -1,4 +1,3 @@
-
 import sys
 import time
 import random
@@ -20,10 +19,10 @@ logo_lines = [
     f":{R}88      \"8b  {O}88      \"8b  {Y}88           {G}88      \"8b  {B}d8\"     \"8b {RESET}:\n",
     f":{R}88      ,8P  {O}88      ,8P  {Y}88  ____     {G}88      ,8P  {B}Y8,         {RESET}:\n",
     f":{R}88aaaaaa8P'  {O}88aaaaaa8P'  {Y}88a8PPPP8b,  {G}88aaaaaa8P'  {B}`Y8aaaaa,   {RESET}:\n",
-    f":{R}88\"\"\"\"88'    {O}88\"\"\"\"\"\"'    {Y}PP\"      `8b {G}88\"\"\"\"88'      {B}`\"\"\"\"\"8b, {RESET}:\n",
-    f":{R}88    `8b    {O}88                      {Y}d8  {G}88    `8b            {B}`8b {RESET}:\n",
-    f":{R}88     `8b   {O}88               {Y}Y8a     a8P  {G}88     `8b   {B}Y8a     a8P {RESET}:\n",
-    f":{R}88      `8b  {O}88                {Y}\"Y88888P\"   {G}88      `8b   {B}\"Y88888P\"  {RESET}:\n",
+    f":{R}88\"\"\"\"88'    {O}88\"\"\"\"\"\"'    {Y}PP\"     `8b  {G}88\"\"\"\"88'      {B}`\"\"\"\"\"8b, {RESET}:\n",
+    f":{R}88    `8b    {O}88                    {Y}d8  {G}88    `8b            {B}`8b {RESET}:\n",
+    f":{R}88     `8b   {O}88           {Y}Y8a     a8P  {G}88     `8b   {B}Y8a     a8P {RESET}:\n",
+    f":{R}88      `8b  {O}88             {Y}\"Y88888P\"  {G}88      `8b   {B}\"Y88888P\"  {RESET}:\n",
     "··································································\n"
 ]
 
@@ -110,4 +109,4 @@ elif boot_style == 3:
 # 5. Clean Credit Reveal & Loading Text
 time.sleep(0.4)
 print(f"{DIM}                  Made By NeverStopTheCoder © 2026{RESET}")
-print("LOADING...\n")
+
