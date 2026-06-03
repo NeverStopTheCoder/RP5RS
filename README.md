@@ -16,6 +16,8 @@ But if you dont put a file in there it will grab the first one from the home fol
 Note:this only works for a keyboard right now also make sure for right now you plug in the keyboard first or it wont work right
 
 ## Logo At Boot Up
+<img width="467" height="209" alt="image" src="https://github.com/user-attachments/assets/1577bcf7-5dc7-4853-9965-e0c5851f3b70" />
+
 ```
 ··································································
 :88888888ba   88888888ba   8888888888   88888888ba    ad88888ba  :
