@@ -27,22 +27,7 @@ sudo mount --bind /tmp/cpuinfo /proc/cpuinfo
 sudo TERM=linux sh -c 'setterm -blank 0 -powerdown 0 > /dev/tty1' 2>/dev/null
 
 # 2. Print your custom boot logo directly to the screen
-cat << 'EOF'
-
-··································································
-:88888888ba   88888888ba   8888888888   88888888ba    ad88888ba  :
-:88      "8b  88      "8b  88           88      "8b  d8"     "8b :
-:88      ,8P  88      ,8P  88  ____     88      ,8P  Y8,         :
-:88aaaaaa8P'  88aaaaaa8P'  88a8PPPP8b,  88aaaaaa8P'  `Y8aaaaa,   :
-:88""""88'    88""""""'    PP"      `8b  88""""88'      `"""""8b, :
-:88    `8b    88                     d8  88    `8b            `8b :
-:88     `8b   88               Y8a     a8P  88     `8b   Y8a     a8P :
-:88      `8b  88                "Y88888P"   88      `8b   "Y88888P"  :
-··································································
-
-Made By NeverStopTheCoder © 2026
-LOADING...
-EOF
+python3 "$(dirname "$0")/PrintLogo.py"
 
 # 3. Wait 2 seconds for the player to see your logo
 sleep 2
