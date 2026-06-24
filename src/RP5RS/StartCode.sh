@@ -1,5 +1,8 @@
 #!/bin/bash
 sudo mkdir /sd
+sudo chmod +x ./*.elf 2>/dev/null
+
+trap 'sudo pkill -9 -f "tennis.elf" 2>/dev/null; exit' INT TERM EXIT
 
 echo "[Target]
 Hardware=rpi
@@ -36,9 +39,9 @@ sleep 2
 while true; do
     echo "Starting Game Match..."
     
-    # Bash automatically finds and targets any execution-ready game file using ./*.elf
-    sudo chmod +x ./*.elf 2>/dev/null
-    sudo SDL_VIDEODRIVER=kmsdrm SDL_AUDIODRIVER=alsa ./*.elf --hw rpi
+    sudo SDL_VIDEODRIVER=kmsdrm SDL_AUDIODRIVER=oss ./*.elf --hw rpi >/dev/null 2>&1 &
+    PID=$!
+    wait $PID 2>/dev/null
     
     echo "Match concluded. Deep cleaning memory cache..."
     sync
