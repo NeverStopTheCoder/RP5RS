@@ -2,7 +2,10 @@
 sudo mkdir /sd
 sudo chmod +x ./*.elf 2>/dev/null
 
-trap 'sudo pkill -9 -f "tennis.elf" 2>/dev/null; exit' INT TERM EXIT
+ELF_FILE=$(ls ./*.elf 2>/dev/null | head -n 1)
+ELF_NAME=$(basename "$ELF_FILE" 2>/dev/null)
+
+trap 'sudo pkill -9 -f "$ELF_NAME" 2>/dev/null; exit' INT TERM EXIT
 
 echo "[Target]
 Hardware=rpi
@@ -37,9 +40,9 @@ sleep 2
 
 # 4. The Crash-Proof Game Loop
 while true; do
-    echo "Starting Game Match..."
+    echo "Starting Game Match($ELF_NAME)"
     
-    sudo SDL_VIDEODRIVER=kmsdrm SDL_AUDIODRIVER=oss ./*.elf --hw rpi >/dev/null 2>&1 &
+    sudo SDL_VIDEODRIVER=kmsdrm SDL_AUDIODRIVER=oss "$ELF_FILE" --hw rpi >/dev/null 2>&1 &
     PID=$!
     wait $PID 2>/dev/null
     
